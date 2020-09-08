@@ -270,9 +270,11 @@ void _render_texture_core(
         tex_tri_p1_ind = tex_triangles[3*i + 1];
         tex_tri_p2_ind = tex_triangles[3*i + 2];
 
-        tex_p0.x = tex_coords[3*tex_tri_p0_ind]; tex_p0.y = tex_coords[3*tri_p0_ind + 1];
-        tex_p1.x = tex_coords[3*tex_tri_p1_ind]; tex_p1.y = tex_coords[3*tri_p1_ind + 1];
-        tex_p2.x = tex_coords[3*tex_tri_p2_ind]; tex_p2.y = tex_coords[3*tri_p2_ind + 1];
+        tex_p0.x = tex_coords[3*tex_tri_p0_ind]; tex_p0.y = tex_coords[3*tex_tri_p0_ind + 1];
+        tex_p1.x = tex_coords[3*tex_tri_p1_ind]; tex_p1.y = tex_coords[3*tex_tri_p1_ind + 1];
+        tex_p2.x = tex_coords[3*tex_tri_p2_ind]; tex_p2.y = tex_coords[3*tex_tri_p2_ind + 1];
+        //std::cout<<tex_p0.x<<' ';
+        //std::cout<<tex_p0.y<<' ';
 
 
         x_min = max((int)ceil(min(p0.x, min(p1.x, p2.x))), 0);
@@ -296,7 +298,7 @@ void _render_texture_core(
                 {
                     get_point_weight(weight, p, p0, p1, p2);
                     p_depth = weight[0]*p0_depth + weight[1]*p1_depth + weight[2]*p2_depth;
-                    
+
                     if((p_depth > depth_buffer[y*w + x]))
                     {
                         // -- color from texture
@@ -304,8 +306,8 @@ void _render_texture_core(
                         get_point_weight(weight, p, p0, p1, p2);
                         // cal coord in texture
                         tex_p = tex_p0*weight[0] + tex_p1*weight[1] + tex_p2*weight[2];
-                        tex_p.x = max(min(tex_p.x, float(tex_w - 1)), float(0)); 
-                        tex_p.y = max(min(tex_p.y, float(tex_h - 1)), float(0)); 
+                        tex_p.x = max(min(tex_p.x, float(tex_w - 1)), float(0));
+                        tex_p.y = max(min(tex_p.y, float(tex_h - 1)), float(0));
 
                         yd = tex_p.y - floor(tex_p.y);
                         xd = tex_p.x - floor(tex_p.x);
