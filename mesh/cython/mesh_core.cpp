@@ -348,7 +348,8 @@ void _write_obj_with_colors_texture(string filename, string mtl_name,
 {
     int i;
 
-    ofstream obj_file(filename);
+    //ofstream obj_file(filename);
+    ofstream obj_file(filename.c_str());
 
     // first line of the obj file: the mtl name
     obj_file << "mtllib " << mtl_name << endl;
