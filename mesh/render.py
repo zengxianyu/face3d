@@ -68,6 +68,7 @@ def render_colors(vertices, triangles, colors, h, w, c = 3, BG = None):
         image = np.zeros((h, w, c), dtype = np.float32)
     else:
         assert BG.shape[0] == h and BG.shape[1] == w and BG.shape[2] == c
+        BG = BG.astype(np.float32)
         image = BG
     depth_buffer = np.zeros([h, w], dtype = np.float32, order = 'C') - 999999.
 
